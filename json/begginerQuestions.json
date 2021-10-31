@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const array = [1, 2, 3]\nconst result = array[3]",
+    "correct": "2️⃣",
+    "alternatives": ["null", "undefined", "3", "throw new SyntaxError"]
+  },
+  {
+    "id": 2,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const obj = Object.assign({\n name: 'JavaScript'\n}, {\n name: 'ECMAScript'\n}, {\n name: 'LiveScript'\n});\n\nconst result = obj.name",
+    "correct": "2️⃣",
+    "alternatives": ["JavaScript", "LiveScript", "ECMAScript", "undefined"]
+  },
+  {
+    "id": 3,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const array = [1,2,3,5]\nconst result = array.indexOf(3)",
+    "correct": "1️⃣",
+    "alternatives": ["2", "5", "-1", "3"]
+  },
+  {
+    "id": 4,
+    "question": "Qual das opções seria o equivalente a result **+= value ?**",
+    "text": "",
+    "correct": "4️⃣",
+    "alternatives": [
+      "result = value",
+      "result = value++",
+      "result = ++value",
+      "result = result + value"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const o = {\n name: 'Brendan'\n};\nconst s = JSON.parse(JSON.stringify(0))\nconst result = s === o",
+    "correct": "2️⃣",
+    "alternatives": ["undefined", "false", "null", "true"]
+  },
+  {
+    "id": 6,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const result = '2009' - '1995'",
+    "correct": "2️⃣",
+    "alternatives": ["NaN", 14, "Gerara um erro", "undefined"]
+  },
+  {
+    "id": 7,
+    "question": "Qual não e um **operador logico** ?",
+    "text": "",
+    "correct": "4️⃣",
+    "alternatives": ["&&", "!", "||", "|"]
+  },
+  {
+    "id": 8,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const re = /java/i\nconst str = 'JavaScript'\nconst result = re.test(str)",
+    "correct": "2️⃣",
+    "alternatives": ["Gerara um erro", "true", "undefined", "false"]
+  }
+]

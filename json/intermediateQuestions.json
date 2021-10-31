@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "question": "Qual e o valor de **result** ?",
+    "text": "let result = 2009\nconst func = (x = 262) => {\n result = x\n}\nfunc(null)",
+    "correct": "1️⃣",
+    "alternatives": ["null", "262", "undefined", "2009"]
+  },
+  {
+    "id": 2,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const result = 0 || 1 && 2 || 3",
+    "correct": "3️⃣",
+    "alternatives": ["0", "1", "2", "3"]
+  },
+  {
+    "id": 3,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const plus = +0\nconst minus = -0\nconst result = plus === minus",
+    "correct": "2️⃣",
+    "alternatives": ["0", "true", "undefined", "false"]
+  },
+  {
+    "id": 4,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const result = '1' == 1",
+    "correct": "1️⃣",
+    "alternatives": ["true", "false", "undefined", "Gerara um erro"]
+  },
+  {
+    "id": 5,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const value = new Set([1,1,2,3,2,3])\nconst result = [...value]",
+    "correct": "3️⃣",
+    "alternatives": ["112323", "[1,1,2,3,2,3]", "[1,2,3]", "[1]"]
+  },
+  {
+    "id": 6,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const getA = () => 1\nconst getB = () => 2\nconst getC = () => 3\nconst result = (getA(), getB(), getC())",
+    "correct": "4️⃣",
+    "alternatives": ["undefined", "1", "6", "3"]
+  },
+  {
+    "id": 7,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const array = [10,15,20,25,30]\nconst result = array.find(v => v > 15)",
+    "correct": "1️⃣",
+    "alternatives": ["20", "30", "25", "15"]
+  },
+  {
+    "id": 8,
+    "question": "Qual e o valor de **result** ?",
+    "text": "class User {\n getName() {}\n}\nconst result = typeof User",
+    "correct": "3️⃣",
+    "alternatives": ["'string'", "'object", "'function'", "'class'"]
+  }
+]
