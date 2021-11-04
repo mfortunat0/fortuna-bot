@@ -5,12 +5,9 @@
   "repository": "git@github.com:mfortunat0/fortuna-bot.git",
   "author": "matheus <matheus.xmaz10@gmail.com>",
   "license": "MIT",
-  "engines": {
-    "node": "17.0.1"
-  },
   "scripts": {
     "start": "node build/index.js",
-    "dpc": "node src/deploy-commands.js",
+    "dpc": "ts-node-dev src/deploy-commands.ts",
     "dev": "ts-node-dev src/index.ts"
   },
   "dependencies": {

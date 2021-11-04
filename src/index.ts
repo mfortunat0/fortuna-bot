@@ -59,7 +59,10 @@ const reactWithEmojis = async (message: Message) => {
   await message.react("4️⃣");
 };
 
-const generateQuestion = async (dificult: string, interaction: Interaction) => {
+const generateQuestion = async (
+  dificult: string,
+  interaction: Interaction | Message
+) => {
   let questions: QuestionFile[];
   if (dificult === "Begginer") questions = await getAllQuestionsBegginer();
   if (dificult === "Intermediate")
@@ -96,6 +99,17 @@ client.on("interactionCreate", async (interaction) => {
     generateQuestion("Begginer", interaction);
   } else if (commandName === "js-intermediate") {
     generateQuestion("Intermediate", interaction);
+  }
+});
+
+client.on("messageCreate", (message) => {
+  if (message.content[0] === "/") {
+    const commandName = message.content.replace("/", "");
+    if (commandName === "js-beginner") {
+      generateQuestion("Begginer", message);
+    } else if (commandName === "js-intermediate") {
+      generateQuestion("Intermediate", message);
+    }
   }
 });
 
