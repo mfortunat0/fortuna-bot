@@ -19,9 +19,9 @@ const client = new Client({
   ],
 });
 
-const getAllQuestionsBegginer = async () => {
+const getAllQuestionsBeginner = async () => {
   const fileContent = await readFile(
-    join(__dirname, "..", "json", "begginerQuestions.json")
+    join(__dirname, "..", "json", "beginnerQuestions.json")
   );
   return JSON.parse(fileContent.toString()) as QuestionFile[];
 };
@@ -29,6 +29,13 @@ const getAllQuestionsBegginer = async () => {
 const getAllQuestionsIntermediate = async () => {
   const fileContent = await readFile(
     join(__dirname, "..", "json", "intermediateQuestions.json")
+  );
+  return JSON.parse(fileContent.toString()) as QuestionFile[];
+};
+
+const getAllQuestionsHtml = async () => {
+  const fileContent = await readFile(
+    join(__dirname, "..", "json", "htmlQuestions.json")
   );
   return JSON.parse(fileContent.toString()) as QuestionFile[];
 };
@@ -64,9 +71,12 @@ const generateQuestion = async (
   interaction: Interaction | Message
 ) => {
   let questions: QuestionFile[];
-  if (dificult === "Begginer") questions = await getAllQuestionsBegginer();
-  if (dificult === "Intermediate")
+  if (dificult === "Beginner") {
+    questions = await getAllQuestionsBeginner();
+  }
+  if (dificult === "Intermediate") {
     questions = await getAllQuestionsIntermediate();
+  }
 
   const randomQuest =
     Math.floor(Math.random() * (questions.length - 1 - 0)) + 0;
@@ -96,7 +106,7 @@ client.on("interactionCreate", async (interaction) => {
   const { commandName } = interaction;
 
   if (commandName === "js-beginner") {
-    generateQuestion("Begginer", interaction);
+    generateQuestion("Beginner", interaction);
   } else if (commandName === "js-intermediate") {
     generateQuestion("Intermediate", interaction);
   }
@@ -105,8 +115,9 @@ client.on("interactionCreate", async (interaction) => {
 client.on("messageCreate", (message) => {
   if (message.content[0] === "/") {
     const commandName = message.content.replace("/", "");
+
     if (commandName === "js-beginner") {
-      generateQuestion("Begginer", message);
+      generateQuestion("Beginner", message);
     } else if (commandName === "js-intermediate") {
       generateQuestion("Intermediate", message);
     }
@@ -127,9 +138,12 @@ client.on("messageReactionAdd", async (msg, user) => {
     const dificult = messageContent.split(" ")[3];
     let questions: QuestionFile[];
 
-    if (dificult === "Begginer") questions = await getAllQuestionsBegginer();
-    if (dificult === "Intermediate")
+    if (dificult === "Beginner") {
+      questions = await getAllQuestionsBeginner();
+    }
+    if (dificult === "Intermediate") {
       questions = await getAllQuestionsIntermediate();
+    }
 
     const id = Number(messageContent.split(" ")[1].replace("**", ""));
 

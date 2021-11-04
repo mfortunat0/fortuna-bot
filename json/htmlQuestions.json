@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "question": "Escolha o elemento HTML correto para definir a palavra 'desenvolvedor' importante",
+    "text": "<p> Quero ser desenvolvedor front-end </p>",
+    "correct": "3️⃣",
+    "alternatives": ["<i>", "<b>", "<strong>", "<important>"]
+  },
+  {
+    "id": 2,
+    "question": "Qual é o elemento HTML correto para reproduzir arquivos de vídeo",
+    "text": "<??? width='320' height='240' controls>\n <source src='movie.mp4' type='video/mp4'>Your browser does not support the video tag.\n</???>",
+    "correct": "4️⃣",
+    "alternatives": ["media", "movie", "scene", "video"]
+  },
+  {
+    "id": 3,
+    "question": "Qual é o comportamento da tag <pre>",
+    "text": "<pre>O que     acontecerá        $ - %        comigo@@@</pre>",
+    "correct": "1️⃣",
+    "alternatives": [
+      "Preserva espaços e quebras de linha de um texto",
+      "Formata texto que contêm caracteres especiais",
+      "Corretor ortográfico que marca as palavras incorretas",
+      "Marca o texto como prioridade SEO"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "É possivel fazer um texto aparecer de trás para frente usando apenas HTML",
+    "text": "missa  res aireuq uE",
+    "correct": "3️⃣",
+    "alternatives": [
+      "Sim usando a tag <inverse>",
+      "O HTML não tem essa opção",
+      "Sim usando a tag <bdo>",
+      "Sim usando a tag <reverse>"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Qual a forma correta de carregar um iframe? ",
+    "text": "<iframe ????='https://agnaldoguima.github.io/Dev/'> </iframe>",
+    "correct": "4️⃣",
+    "alternatives": ["href", "url", "link", "src"]
+  }
+]
