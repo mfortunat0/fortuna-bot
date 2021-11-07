@@ -59,5 +59,59 @@
     "text": "const re = /java/i\nconst str = 'JavaScript'\nconst result = re.test(str)",
     "correct": "2️⃣",
     "alternatives": ["Gerara um erro", "true", "undefined", "false"]
+  },
+  {
+    "id": 9,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const value = 20.0\nconst result = Number.isInteger(value)",
+    "correct": "2️⃣",
+    "alternatives": ["null", "true", "NaN", "false"]
+  },
+  {
+    "id": 10,
+    "question": "Qual a sintaxe correta para fazer um comentario ?",
+    "text": "",
+    "correct": "3️⃣",
+    "alternatives": [
+      "<< Comment >>",
+      "/ Comment /",
+      "/* Comment */",
+      ">> Comment <<"
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Qual e a maneira **incorreta** de declarar uma variavel ?",
+    "text": "",
+    "correct": "3️⃣",
+    "alternatives": ["_result", "_2result", "2result", "$result"]
+  },
+  {
+    "id": 12,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const func = function(a, b) {\n return arguments.length\n}\nconst result = func(4,3,2,1)",
+    "correct": "2️⃣",
+    "alternatives": ["2", "4", "undefined", "0"]
+  },
+  {
+    "id": 13,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const result = 95\nconst RESULT = 2009\nconst Result = 262",
+    "correct": "4️⃣",
+    "alternatives": ["2009", "262", "undefined", "95"]
+  },
+  {
+    "id": 14,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const value = 95\nconst result = value++",
+    "correct": "1️⃣",
+    "alternatives": ["95", "97", "96", "94"]
+  },
+  {
+    "id": 15,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const str = 'JavaScript'\nconst result = str.length",
+    "correct": "3️⃣",
+    "alternatives": ["undefined", "9", "10", "11"]
   }
 ]

@@ -10,6 +10,12 @@ const commands = [
   new SlashCommandBuilder()
     .setName("js-intermediate")
     .setDescription("Exercicio aleatorio javascript nivel intermediario"),
+  new SlashCommandBuilder()
+    .setName("js-advanced")
+    .setDescription("Exercicio aleatorio javascript nivel avançado"),
+  new SlashCommandBuilder()
+    .setName("html")
+    .setDescription("Exercicio aleatorio sobre HTML"),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);

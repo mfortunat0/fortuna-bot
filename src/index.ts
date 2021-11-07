@@ -21,14 +21,21 @@ const client = new Client({
 
 const getAllQuestionsBeginner = async () => {
   const fileContent = await readFile(
-    join(__dirname, "..", "json", "beginnerQuestions.json")
+    join(__dirname, "..", "json", "jsBeginnerQuestions.json")
   );
   return JSON.parse(fileContent.toString()) as QuestionFile[];
 };
 
 const getAllQuestionsIntermediate = async () => {
   const fileContent = await readFile(
-    join(__dirname, "..", "json", "intermediateQuestions.json")
+    join(__dirname, "..", "json", "jsIntermediateQuestions.json")
+  );
+  return JSON.parse(fileContent.toString()) as QuestionFile[];
+};
+
+const getAllQuestionsAdvanced = async () => {
+  const fileContent = await readFile(
+    join(__dirname, "..", "json", "jsAdvancedQuestions.json")
   );
   return JSON.parse(fileContent.toString()) as QuestionFile[];
 };
@@ -45,9 +52,9 @@ const formateQuestion = (
   text: string,
   question: string,
   alternatives: string[],
-  dificult: string
+  category: string
 ) => {
-  return `**Questão: ${id}** | ${dificult} \n
+  return `**Questão: ${id}** | ${category}\n
   ${question}${text ? "\n```js" : ""}${text ? "\n" + text : ""}${
     text ? "\n```" : ""
   }
@@ -67,15 +74,21 @@ const reactWithEmojis = async (message: Message) => {
 };
 
 const generateQuestion = async (
-  dificult: string,
+  category: string,
   interaction: Interaction | Message
 ) => {
   let questions: QuestionFile[];
-  if (dificult === "Beginner") {
+  if (category === "Beginner Javascript") {
     questions = await getAllQuestionsBeginner();
   }
-  if (dificult === "Intermediate") {
+  if (category === "Intermediate Javascript") {
     questions = await getAllQuestionsIntermediate();
+  }
+  if (category === "Advanced Javascript") {
+    questions = await getAllQuestionsAdvanced();
+  }
+  if (category === "HTML") {
+    questions = await getAllQuestionsHtml();
   }
 
   const randomQuest =
@@ -86,7 +99,7 @@ const generateQuestion = async (
     text,
     question,
     alternatives,
-    dificult
+    category
   );
   //@ts-ignore
   const message: Message = await interaction.reply({
@@ -94,6 +107,9 @@ const generateQuestion = async (
     fetchReply: true,
   });
   reactWithEmojis(message);
+  setTimeout(() => {
+    message.delete();
+  }, 120000);
 };
 
 client.on("ready", () => {
@@ -106,9 +122,13 @@ client.on("interactionCreate", async (interaction) => {
   const { commandName } = interaction;
 
   if (commandName === "js-beginner") {
-    generateQuestion("Beginner", interaction);
+    generateQuestion("Beginner Javascript", interaction);
   } else if (commandName === "js-intermediate") {
-    generateQuestion("Intermediate", interaction);
+    generateQuestion("Intermediate Javascript", interaction);
+  } else if (commandName === "js-advanced") {
+    generateQuestion("Advanced Javascript", interaction);
+  } else if (commandName === "html") {
+    generateQuestion("HTML", interaction);
   }
 });
 
@@ -117,9 +137,13 @@ client.on("messageCreate", (message) => {
     const commandName = message.content.replace("/", "");
 
     if (commandName === "js-beginner") {
-      generateQuestion("Beginner", message);
+      generateQuestion("Beginner Javascript", message);
     } else if (commandName === "js-intermediate") {
-      generateQuestion("Intermediate", message);
+      generateQuestion("Intermediate Javascript", message);
+    } else if (commandName === "js-advanced") {
+      generateQuestion("Advanced Javascript", message);
+    } else if (commandName === "html") {
+      generateQuestion("HTML", message);
     }
   }
 });
@@ -135,25 +159,29 @@ client.on("messageReactionAdd", async (msg, user) => {
     user.username !== "fortuna-bot"
   ) {
     const messageContent = msg.message.content;
-    const dificult = messageContent.split(" ")[3];
+    const category = messageContent.split(" ")[3].trim();
     let questions: QuestionFile[];
 
-    if (dificult === "Beginner") {
+    if (category === "Beginner") {
       questions = await getAllQuestionsBeginner();
     }
-    if (dificult === "Intermediate") {
+    if (category === "Intermediate") {
       questions = await getAllQuestionsIntermediate();
+    }
+    if (category === "Advanced") {
+      questions = await getAllQuestionsAdvanced();
+    }
+    if (category === "HTML") {
+      questions = await getAllQuestionsHtml();
     }
 
     const id = Number(messageContent.split(" ")[1].replace("**", ""));
 
     if (`${questions[id - 1].correct}` === `${emoji}`) {
-      user.send(
-        `Parabéns você acertou a questão N° ${id} na dificuldade ${dificult}`
-      );
+      user.send(`Parabéns você acertou a questão **N° ${id}** em ${category}`);
     } else {
       user.send(
-        `Sinto muito, você errou a questão N° ${id} na dificuldade ${dificult}  `
+        `Sinto muito, você errou a questão **N° ${id}** em ${category}  `
       );
     }
   }

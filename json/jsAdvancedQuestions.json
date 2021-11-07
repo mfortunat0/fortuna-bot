@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const toString = Object.prototype.toString\nconst result = toString.call(null)",
+    "correct": "4️⃣",
+    "alternatives": ["[object Object]", "null", "[Object]", "[object Null]"]
+  },
+  {
+    "id": 2,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const func = function () {\n return arguments.join('')\n}\nconst result = funct(2009,262)",
+    "correct": "2️⃣",
+    "alternatives": ["NaN", "throw a TypeError", "2271", "2009262"]
+  },
+  {
+    "id": 3,
+    "question": "Qual e o valor de **result** ?",
+    "text": "let result = 'string'\n(function () {\n result = typeof arguments\n})()",
+    "correct": "1️⃣",
+    "alternatives": ["'object'", "'array'", "undefined", "'string'"]
+  },
+  {
+    "id": 4,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const target = {\n name = 'ECMAScript'\n}\nconst proxy = new Proxy(target, {})\nproxy.name = 'JavaScript'\nconst result = target.name",
+    "correct": "4️⃣",
+    "alternatives": ["undefined", "null", "ECMAScript", "JavaScript"]
+  },
+  {
+    "id": 5,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const User = function () {\n const result = new.target === User\n}\nconst man = new User()",
+    "correct": "1️⃣",
+    "alternatives": ["true", "throw a SyntaxError", "false", "null"]
+  },
+  {
+    "id": 6,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const constructor = function () {}\nconst result = constructor.prototype.constructor === constructor",
+    "correct": "2️⃣",
+    "alternatives": ["false", "true", "NaN", "null"]
+  },
+  {
+    "id": 7,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const plus = +0\nconst minus = -0\nconst result = Object.is(plus, minus)",
+    "correct": "1️⃣",
+    "alternatives": ["false", "true", "NaN", "null"]
+  },
+  {
+    "id": 8,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const obj = {}\nconst result = 'toString' in obj",
+    "correct": "3️⃣",
+    "alternatives": ["false", "undefined", "true", "null"]
+  }
+]
