@@ -113,5 +113,66 @@
     "text": "const str = 'JavaScript'\nconst result = str.length",
     "correct": "3️⃣",
     "alternatives": ["undefined", "9", "10", "11"]
+  },
+  {
+    "id": 16,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const fun = function () {\n return 2009\n}\nconst result = 262 && func()",
+    "correct": "2️⃣",
+    "alternatives": ["true", "2009", "false", "262"]
+  },
+  {
+    "id": 17,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const value = new Set([1,2,3])\nvalue.add(1)\nconst result = value.size",
+    "correct": "3️⃣",
+    "alternatives": ["4", "2", "3", "undefined"]
+  },
+  {
+    "id": 18,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const result = ~~(12.34)",
+    "correct": "3️⃣",
+    "alternatives": ["-12", "12.34", "12", "-12.34"]
+  },
+  {
+    "id": 19,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const result = '1_2_3'.split('_')",
+    "correct": "2️⃣",
+    "alternatives": ["undefined", "['1','2','3']", "[1,2,3]", "123"]
+  },
+  {
+    "id": 20,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const f = (r,v) => r + v\nconst result = [1,2,3].reduce(f,0)",
+    "correct": "4️⃣",
+    "alternatives": ["0", "123", "5", "6"]
+  },
+  {
+    "id": 21,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const array = [1,2,3]\narray.shift()\nconst result = array",
+    "correct": "2️⃣",
+    "alternatives": ["[0,1,2,3]", "[2,3]", "[1,2]", "[1,2,3]"]
+  },
+  {
+    "id": 22,
+    "question": "Qual e o valor de **result** ?",
+    "text": "const isTrue = false\nconst result = isTrue ? 2009 : 262",
+    "correct": "1️⃣",
+    "alternatives": ["262", "false", "2009", "true"]
+  },
+  {
+    "id": 23,
+    "question": "Como converter um **object** em uma **String Json** ?",
+    "text": "",
+    "correct": "3️⃣",
+    "alternatives": [
+      "JSON.toString()",
+      "JSON.parse()",
+      "JSON.stringify()",
+      "JSON.convert()"
+    ]
   }
 ]
