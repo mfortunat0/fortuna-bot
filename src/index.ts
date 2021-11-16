@@ -19,6 +19,11 @@ const client = new Client({
   ],
 });
 
+const TOKEN =
+  process.env.NODE_ENV === "production"
+    ? process.env.TOKEN
+    : process.env.TOKEN_TEST;
+
 const getAllQuestionsBeginner = async () => {
   const fileContent = await readFile(
     join(__dirname, "..", "json", "jsBeginnerQuestions.json")
@@ -101,12 +106,15 @@ const generateQuestion = async (
     alternatives,
     category
   );
+
   //@ts-ignore
   const message: Message = await interaction.reply({
     content: formattedQuestion,
     fetchReply: true,
   });
+
   reactWithEmojis(message);
+
   setTimeout(() => {
     message.delete();
   }, 120000);
@@ -187,4 +195,4 @@ client.on("messageReactionAdd", async (msg, user) => {
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(TOKEN);

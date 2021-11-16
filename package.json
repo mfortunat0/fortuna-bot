@@ -6,7 +6,8 @@
   "author": "matheus <matheus.xmaz10@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "NODE_ENV=production node build/index.js",
+    "build": "tsc",
     "dpc": "ts-node-dev src/deploy-commands.ts",
     "dev": "ts-node-dev src/index.ts"
   },
