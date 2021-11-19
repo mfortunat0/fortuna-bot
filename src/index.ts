@@ -1,7 +1,14 @@
 import "dotenv/config";
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { Client, Intents, Interaction, Message } from "discord.js";
+import {
+  Client,
+  Intents,
+  Interaction,
+  Message,
+  MessageAttachment,
+  MessageEmbed,
+} from "discord.js";
 
 type QuestionFile = {
   id: number;
@@ -23,6 +30,9 @@ const TOKEN =
   process.env.NODE_ENV === "production"
     ? process.env.TOKEN
     : process.env.TOKEN_TEST;
+
+const fortunaProfile = new MessageAttachment("./assets/fortuna.jpeg");
+const dotJsProfile = new MessageAttachment("./assets/dotjs.jpg");
 
 const getAllQuestionsBeginner = async () => {
   const fileContent = await readFile(
@@ -57,18 +67,47 @@ const formateQuestion = (
   text: string,
   question: string,
   alternatives: string[],
+  commandName: string,
   category: string
 ) => {
-  return `**Questão: ${id}** | ${category}\n
-  ${question}${text ? "\n```js" : ""}${text ? "\n" + text : ""}${
-    text ? "\n```" : ""
-  }
-  **1️**: ${alternatives[0]}
-  **2️**: ${alternatives[1]}
-  **3️**: ${alternatives[2]}
-  **4️**: ${alternatives[3]}
-  
-  Reaja com a opção desejada. `;
+  const markdownType = commandName.split("-")[0];
+  const exampleEmbed = new MessageEmbed()
+    .setAuthor("Fortuna-bot", "attachment://fortuna.jpeg")
+    .setColor("#fdd54f")
+    .setTitle(`**Questão: ${id}**`)
+    .setDescription(
+      `${question}${text ? "\n```" + markdownType + "" : ""}${
+        text ? "\n" + text : ""
+      }${text ? "\n```" : ""}`
+    )
+    .setThumbnail("attachment://dotjs.jpg")
+    .addFields(
+      { name: "\u200B", value: "\u200B" },
+      {
+        name: "Como responder?",
+        value: "Basta reagir com a alternativa que acredita estar certa.",
+      },
+      {
+        name: "\u200B",
+        value: `1️⃣: ${alternatives[0]}`,
+      },
+      {
+        name: "\u200B",
+        value: `2️⃣: ${alternatives[1]}`,
+      },
+      {
+        name: "\u200B",
+        value: `3️⃣: ${alternatives[2]}`,
+      },
+      {
+        name: "\u200B",
+        value: `4️⃣: ${alternatives[3]}`,
+      }
+    )
+    .addField("\u200B", "\u200B")
+    .setFooter(category, "attachment://dotjs.jpg")
+    .setTimestamp();
+  return exampleEmbed;
 };
 
 const reactWithEmojis = async (message: Message) => {
@@ -80,7 +119,8 @@ const reactWithEmojis = async (message: Message) => {
 
 const generateQuestion = async (
   category: string,
-  interaction: Interaction | Message
+  interaction: Interaction | Message,
+  commandName: string
 ) => {
   let questions: QuestionFile[];
   if (category === "Beginner Javascript") {
@@ -104,12 +144,14 @@ const generateQuestion = async (
     text,
     question,
     alternatives,
+    commandName,
     category
   );
 
   //@ts-ignore
   const message: Message = await interaction.reply({
-    content: formattedQuestion,
+    embeds: [formattedQuestion],
+    files: [fortunaProfile, dotJsProfile],
     fetchReply: true,
   });
 
@@ -130,13 +172,13 @@ client.on("interactionCreate", async (interaction) => {
   const { commandName } = interaction;
 
   if (commandName === "js-beginner") {
-    generateQuestion("Beginner Javascript", interaction);
+    generateQuestion("Beginner Javascript", interaction, commandName);
   } else if (commandName === "js-intermediate") {
-    generateQuestion("Intermediate Javascript", interaction);
+    generateQuestion("Intermediate Javascript", interaction, commandName);
   } else if (commandName === "js-advanced") {
-    generateQuestion("Advanced Javascript", interaction);
+    generateQuestion("Advanced Javascript", interaction, commandName);
   } else if (commandName === "html") {
-    generateQuestion("HTML", interaction);
+    generateQuestion("HTML", interaction, commandName);
   }
 });
 
@@ -145,13 +187,13 @@ client.on("messageCreate", (message) => {
     const commandName = message.content.replace("/", "");
 
     if (commandName === "js-beginner") {
-      generateQuestion("Beginner Javascript", message);
+      generateQuestion("Beginner Javascript", message, commandName);
     } else if (commandName === "js-intermediate") {
-      generateQuestion("Intermediate Javascript", message);
+      generateQuestion("Intermediate Javascript", message, commandName);
     } else if (commandName === "js-advanced") {
-      generateQuestion("Advanced Javascript", message);
+      generateQuestion("Advanced Javascript", message, commandName);
     } else if (commandName === "html") {
-      generateQuestion("HTML", message);
+      generateQuestion("HTML", message, commandName);
     }
   }
 });
@@ -162,28 +204,30 @@ client.on("messageReactionAdd", async (msg, user) => {
   const emoji = msg.emoji.name;
 
   if (
-    author === "fortuna-bot" &&
+    (author === "fortuna-bot" || author === "fortuna-test-bot") &&
     options.includes(emoji) &&
-    user.username !== "fortuna-bot"
+    user.username !== "fortuna-bot" &&
+    user.username !== "fortuna-test-bot"
   ) {
-    const messageContent = msg.message.content;
-    const category = messageContent.split(" ")[3].trim();
+    const id = Number(
+      msg.message.embeds[0].title.split(" ")[1].replace("**", "")
+    );
+    const category = msg.message.embeds[0].footer.text;
+
     let questions: QuestionFile[];
 
-    if (category === "Beginner") {
+    if (category === "Beginner Javascript") {
       questions = await getAllQuestionsBeginner();
     }
-    if (category === "Intermediate") {
+    if (category === "Intermediate Javascript") {
       questions = await getAllQuestionsIntermediate();
     }
-    if (category === "Advanced") {
+    if (category === "Advanced Javascript") {
       questions = await getAllQuestionsAdvanced();
     }
     if (category === "HTML") {
       questions = await getAllQuestionsHtml();
     }
-
-    const id = Number(messageContent.split(" ")[1].replace("**", ""));
 
     if (`${questions[id - 1].correct}` === `${emoji}`) {
       user.send(`Parabéns você acertou a questão **N° ${id}** em ${category}`);
