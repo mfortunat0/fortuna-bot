@@ -7,8 +7,9 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=production node build/index.js",
+    "dpc": "NODE_ENV=production node build/deploy-commands.js",
     "build": "tsc",
-    "dpc": "ts-node-dev src/deploy-commands.ts",
+    "dev:dpc": "ts-node-dev src/deploy-commands.ts",
     "dev": "ts-node-dev src/index.ts"
   },
   "dependencies": {
