@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { readFile } from "fs/promises";
 import { join } from "path";
+import express from "express";
 import {
   Client,
   Intents,
@@ -17,6 +18,8 @@ type QuestionFile = {
   correct: string;
   alternatives: string[];
 };
+
+const app = express();
 
 const client = new Client({
   intents: [
@@ -240,3 +243,5 @@ client.on("messageReactionAdd", async (msg, user) => {
 });
 
 client.login(TOKEN);
+app.get("/", (req, res) => res.send("OK"));
+app.listen(process.env.PORT || 3000);
